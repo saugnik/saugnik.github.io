@@ -1,0 +1,11 @@
+# Local dev / preview tooling (not needed for the live site)
+.claude/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+.vscode/
+.idea/
+node_modules/
