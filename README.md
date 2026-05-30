@@ -31,28 +31,22 @@ rajasikrestaurant/
 
 ## 🚀 Deploy to GitHub Pages (free)
 
-This repo is set up as a **GitHub user site** (`saugnik.github.io`) with the custom
-domain **rajasikrestaurant.in** already configured via the `CNAME` file. The code is
-already committed locally on the `main` branch — you just need to create the repo and push.
+✅ **Live now at https://saugnik.github.io** — a GitHub user site served from the
+`main` branch root.
 
-### Step 1 — Create the repo & push
+The custom domain `rajasikrestaurant.in` is **not** switched on yet (the domain doesn't
+currently resolve / point at GitHub Pages), so the `CNAME` file was intentionally left
+out for now. Add it back via the steps below once DNS is ready.
 
-Easiest, with the GitHub CLI (already authenticated as `saugnik`):
+### Updating the live site
 
-```bash
-gh repo create saugnik.github.io --public --source=. --remote=origin --push
-```
-
-Or manually:
+Edit any file, then:
 
 ```bash
-git remote add origin https://github.com/saugnik/saugnik.github.io.git
-git push -u origin main
+git add -A && git commit -m "your message" && git push
 ```
 
-> For a `<username>.github.io` repo, GitHub Pages turns on **automatically** from the
-> `main` branch root — no Settings toggle needed. Give it ~1 minute.
-> Temporary URL while DNS propagates: **https://saugnik.github.io**
+GitHub Pages rebuilds automatically within ~1 minute.
 
 ### Step 2 — Point your domain at GitHub
 
@@ -71,8 +65,8 @@ Optional (IPv6 / AAAA for `@`): `2606:50c0:8000::153`, `2606:50c0:8001::153`,
 
 ### Step 3 — Finish
 
-1. GitHub **Settings → Pages** will show your custom domain (from the `CNAME` file).
-   Click **Check** / wait for the green tick.
+1. In GitHub **Settings → Pages → Custom domain**, enter `rajasikrestaurant.in` and
+   Save (this re-creates the `CNAME` file). Wait for the green tick.
 2. Tick **Enforce HTTPS** once the TLS certificate is issued (can take up to an hour).
 3. Visit **https://rajasikrestaurant.in** 🎉
 
