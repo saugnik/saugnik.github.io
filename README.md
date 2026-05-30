@@ -31,39 +31,52 @@ rajasikrestaurant/
 
 ## 🚀 Deploy to GitHub Pages (free)
 
-1. **Create a repo** on GitHub (e.g. `rajasik-website`), public.
-2. **Push these files** from this folder:
+This repo is set up as a **GitHub user site** (`saugnik.github.io`) with the custom
+domain **rajasikrestaurant.in** already configured via the `CNAME` file. The code is
+already committed locally on the `main` branch — you just need to create the repo and push.
 
-   ```bash
-   git init
-   git add .
-   git commit -m "Rajasik Restaurant website"
-   git branch -M main
-   git remote add origin https://github.com/<your-username>/<your-repo>.git
-   git push -u origin main
-   ```
+### Step 1 — Create the repo & push
 
-3. On GitHub: **Settings → Pages → Build and deployment**
-   - Source: **Deploy from a branch**
-   - Branch: **main** · Folder: **/ (root)** → **Save**
-4. Wait ~1 minute. Your site is live at
-   `https://<your-username>.github.io/<your-repo>/`
+Easiest, with the GitHub CLI (already authenticated as `saugnik`):
 
-### 🌐 Use your custom domain `rajasikrestaurant.in`
+```bash
+gh repo create saugnik.github.io --public --source=. --remote=origin --push
+```
 
-1. In **Settings → Pages → Custom domain**, enter `rajasikrestaurant.in` and Save
-   (this creates a `CNAME` file in the repo).
-2. At your domain registrar, add DNS records pointing to GitHub Pages:
+Or manually:
 
-   | Type  | Name | Value |
-   |-------|------|-------|
-   | A     | @    | `185.199.108.153` |
-   | A     | @    | `185.199.109.153` |
-   | A     | @    | `185.199.110.153` |
-   | A     | @    | `185.199.111.153` |
-   | CNAME | www  | `<your-username>.github.io` |
+```bash
+git remote add origin https://github.com/saugnik/saugnik.github.io.git
+git push -u origin main
+```
 
-3. Back in Pages, tick **Enforce HTTPS** once the certificate is issued.
+> For a `<username>.github.io` repo, GitHub Pages turns on **automatically** from the
+> `main` branch root — no Settings toggle needed. Give it ~1 minute.
+> Temporary URL while DNS propagates: **https://saugnik.github.io**
+
+### Step 2 — Point your domain at GitHub
+
+At your registrar for **rajasikrestaurant.in**, add these DNS records:
+
+| Type  | Host / Name | Value |
+|-------|-------------|-------|
+| A     | `@`         | `185.199.108.153` |
+| A     | `@`         | `185.199.109.153` |
+| A     | `@`         | `185.199.110.153` |
+| A     | `@`         | `185.199.111.153` |
+| CNAME | `www`       | `saugnik.github.io` |
+
+Optional (IPv6 / AAAA for `@`): `2606:50c0:8000::153`, `2606:50c0:8001::153`,
+`2606:50c0:8002::153`, `2606:50c0:8003::153`.
+
+### Step 3 — Finish
+
+1. GitHub **Settings → Pages** will show your custom domain (from the `CNAME` file).
+   Click **Check** / wait for the green tick.
+2. Tick **Enforce HTTPS** once the TLS certificate is issued (can take up to an hour).
+3. Visit **https://rajasikrestaurant.in** 🎉
+
+> DNS changes can take from a few minutes up to 24–48 hours to propagate.
 
 ## ✏️ Editing the content
 
