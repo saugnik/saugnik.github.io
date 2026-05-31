@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact &amp; Reservations | Rajasik Restaurant &amp; Banquet, Rishra</title>
+  <meta name="description" content="Reserve a table or enquire about a banquet at Rajasik Restaurant & Banquet, Rishra, Kolkata. Find our address, opening hours, phone and map." />
+  <meta name="theme-color" content="#7b1e27" />
+  <meta property="og:title" content="Contact — Rajasik Restaurant & Banquet" />
+  <meta property="og:description" content="Reserve a table, find us, or enquire about your event in Rishra, Kolkata." />
+  <meta property="og:type" content="restaurant" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ===== Announcement Bar ===== -->
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <span class="topbar__item"><i class="fa-solid fa-music"></i> Live Music Every Friday Night</span>
+      <span class="topbar__dot">•</span>
+      <a class="topbar__item" href="tel:+919830180548"><i class="fa-solid fa-phone"></i> +91 98301 80548</a>
+      <span class="topbar__dot">•</span>
+      <span class="topbar__item topbar__item--banquet"><i class="fa-solid fa-champagne-glasses"></i> Banquet Bookings Open</span>
+    </div>
+  </div>
+
+  <!-- ===== Navbar ===== -->
+  <header class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="brand" aria-label="Rajasik home">
+        <span class="brand__mark">R</span>
+        <span class="brand__text">
+          <span class="brand__name">Rajasik</span>
+          <span class="brand__sub">Restaurant &amp; Banquet</span>
+        </span>
+      </a>
+      <nav class="nav__links" id="navLinks" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="menu.html">Menu</a>
+        <a href="banquet.html">Banquet</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="contact.html" class="active" aria-current="page">Contact</a>
+        <a href="contact.html#reserve" class="btn btn--gold nav__cta">Reserve a Table</a>
+      </nav>
+      <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <div class="nav__backdrop" id="navBackdrop"></div>
+
+  <!-- ===== Page banner ===== -->
+  <section class="pagehero">
+    <div class="pagehero__bg" data-img="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?auto=format&fit=crop&w=1920&q=80"></div>
+    <div class="pagehero__overlay"></div>
+    <div class="container pagehero__content">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="index.html">Home</a> <span>/</span> <span aria-current="page">Contact</span>
+      </nav>
+      <p class="eyebrow eyebrow--light">Get in Touch</p>
+      <h1 class="pagehero__title">Reserve &amp; <span>Visit</span></h1>
+      <p class="pagehero__sub">Book a table, enquire about a banquet, or just call us. We'd love to welcome you to Rajasik.</p>
+    </div>
+  </section>
+
+  <!-- ===== Reservation ===== -->
+  <section class="reserve section" id="reserve">
+    <div class="container reserve__inner">
+      <div class="reserve__info reveal">
+        <p class="eyebrow">Book Your Table</p>
+        <h2 class="section__title">Reserve or <span>Enquire</span></h2>
+        <p>Tell us when you're coming and we'll keep your table ready. For banquet enquiries, just mention your event in the message — we'll get back to you on WhatsApp.</p>
+        <ul class="reserve__contacts">
+          <li><i class="fa-solid fa-phone"></i> <a href="tel:+919830180548">+91 98301 80548</a></li>
+          <li><i class="fa-solid fa-location-dot"></i> 107/A, NK Banerjee St, Bangur Park, Rishra, Kolkata</li>
+          <li><i class="fa-solid fa-clock"></i> 11:00 AM – 10:00 PM <small>(Closed Thursdays)</small></li>
+        </ul>
+      </div>
+
+      <form class="reserve__form reveal" id="reserveForm" novalidate>
+        <div class="field">
+          <label for="rName">Full Name</label>
+          <input type="text" id="rName" name="name" placeholder="Your name" required />
+        </div>
+        <div class="field">
+          <label for="rPhone">Phone</label>
+          <input type="tel" id="rPhone" name="phone" placeholder="10-digit mobile" required />
+        </div>
+        <div class="field field--half">
+          <label for="rDate">Date</label>
+          <input type="date" id="rDate" name="date" required />
+        </div>
+        <div class="field field--half">
+          <label for="rTime">Time</label>
+          <input type="time" id="rTime" name="time" required />
+        </div>
+        <div class="field field--half">
+          <label for="rGuests">Guests</label>
+          <select id="rGuests" name="guests">
+            <option>1</option><option>2</option><option selected>3</option>
+            <option>4</option><option>5</option><option>6</option>
+            <option>7</option><option>8</option><option>10+</option>
+          </select>
+        </div>
+        <div class="field field--half">
+          <label for="rType">Type</label>
+          <select id="rType" name="type">
+            <option>Dine-in</option>
+            <option>Banquet / Event Enquiry</option>
+            <option>Takeaway</option>
+          </select>
+        </div>
+        <div class="field field--full">
+          <label for="rMsg">Message <small>(optional)</small></label>
+          <textarea id="rMsg" name="message" rows="2" placeholder="Any special request or event details"></textarea>
+        </div>
+        <button type="submit" class="btn btn--gold btn--block">
+          <i class="fa-brands fa-whatsapp"></i> Send on WhatsApp
+        </button>
+        <p class="reserve__hint">You'll be redirected to WhatsApp with your details pre-filled.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== Contact / Map ===== -->
+  <section class="contact">
+    <div class="contact__map">
+      <iframe
+        title="Rajasik Restaurant location map"
+        src="https://www.google.com/maps?q=NK%20Banerjee%20Street%2C%20Bangur%20Park%2C%20Rishra%2C%20Kolkata&output=embed"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div class="contact__cards container">
+      <div class="cinfo reveal">
+        <i class="fa-solid fa-location-dot"></i>
+        <h3>Visit Us</h3>
+        <p>107/A, NK Banerjee Street,<br>Bangur Park, Rishra,<br>Kolkata, West Bengal 712248</p>
+      </div>
+      <div class="cinfo reveal">
+        <i class="fa-solid fa-clock"></i>
+        <h3>Opening Hours</h3>
+        <p>Mon – Wed &nbsp;·&nbsp; 11 AM – 10 PM<br>Thursday &nbsp;·&nbsp; Closed<br>Fri – Sun &nbsp;·&nbsp; 11 AM – 10 PM</p>
+      </div>
+      <div class="cinfo reveal">
+        <i class="fa-solid fa-phone-volume"></i>
+        <h3>Reach Us</h3>
+        <p><a href="tel:+919830180548">+91 98301 80548</a><br><a href="mailto:hello@rajasikrestaurant.in">hello@rajasikrestaurant.in</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__col footer__brand">
+        <a href="index.html" class="brand brand--light">
+          <span class="brand__mark">R</span>
+          <span class="brand__text">
+            <span class="brand__name">Rajasik</span>
+            <span class="brand__sub">Restaurant &amp; Banquet</span>
+          </span>
+        </a>
+        <p>A royal feast of flavours in the heart of Rishra — multi-cuisine dining, live music &amp; grand banquets.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://wa.me/919830180548" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" aria-label="Zomato"><i class="fa-solid fa-utensils"></i></a>
+        </div>
+      </div>
+      <div class="footer__col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="banquet.html">Banquet &amp; Events</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="contact.html#reserve">Reserve a Table</a></li>
+          <li><a href="contact.html">Find Us</a></li>
+          <li><a href="tel:+919830180548">Call to Order</a></li>
+          <li><a href="banquet.html">Friday Live Music</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Hours</h4>
+        <ul class="footer__hours">
+          <li><span>Mon – Wed</span><span>11–22</span></li>
+          <li><span>Thursday</span><span>Closed</span></li>
+          <li><span>Fri – Sun</span><span>11–22</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom container">
+      <p>© <span id="year">2026</span> Rajasik Restaurant &amp; Banquet. All rights reserved.</p>
+      <p>Crafted with <i class="fa-solid fa-heart"></i> in Rishra, Kolkata</p>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/919830180548" class="fab fab--wa" aria-label="Chat on WhatsApp" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+  <button class="fab fab--top" id="backTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

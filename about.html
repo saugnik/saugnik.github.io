@@ -3,26 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rajasik Restaurant &amp; Banquet | Multi-Cuisine Dining in Rishra, Kolkata</title>
-  <meta name="description" content="Rajasik Restaurant & Banquet in Rishra, Kolkata — authentic North Indian, Tandoor, Chinese & Continental cuisine. Live music every Friday, spacious banquet hall for weddings & events. Reserve your table today." />
+  <title>About Us | Rajasik Restaurant &amp; Banquet, Rishra</title>
+  <meta name="description" content="Our story — Rajasik Restaurant & Banquet has served authentic multi-cuisine food and grand celebrations in Rishra, Kolkata since 2009." />
   <meta name="theme-color" content="#7b1e27" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Rajasik Restaurant & Banquet" />
-  <meta property="og:description" content="Multi-cuisine dining, live music & elegant banquets in Rishra, Kolkata." />
+  <meta property="og:title" content="About — Rajasik Restaurant & Banquet" />
+  <meta property="og:description" content="Serving Rishra a royal feast of flavours since 2009." />
   <meta property="og:type" content="restaurant" />
-
-  <!-- Emoji favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>" />
-
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" referrerpolicy="no-referrer" />
-
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -48,17 +39,15 @@
           <span class="brand__sub">Restaurant &amp; Banquet</span>
         </span>
       </a>
-
       <nav class="nav__links" id="navLinks" aria-label="Primary">
-        <a href="index.html" class="active" aria-current="page">Home</a>
-        <a href="about.html">About</a>
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active" aria-current="page">About</a>
         <a href="menu.html">Menu</a>
         <a href="banquet.html">Banquet</a>
         <a href="gallery.html">Gallery</a>
         <a href="contact.html">Contact</a>
         <a href="contact.html#reserve" class="btn btn--gold nav__cta">Reserve a Table</a>
       </nav>
-
       <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -66,56 +55,22 @@
   </header>
   <div class="nav__backdrop" id="navBackdrop"></div>
 
-  <!-- ===== Hero ===== -->
-  <section class="hero" id="home">
-    <div class="hero__bg" data-img="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1920&q=80"></div>
-    <div class="hero__overlay"></div>
-    <div class="container hero__content">
-      <p class="hero__eyebrow reveal"><i class="fa-solid fa-utensils"></i> Rishra, Kolkata &nbsp;·&nbsp; Since 2009</p>
-      <h1 class="hero__title reveal">A Royal Feast of <span>Flavours</span></h1>
-      <p class="hero__lead reveal">Authentic North Indian, sizzling Tandoor, fiery Chinese &amp; soulful Continental — crafted with care, served with warmth. Dine in, celebrate big, and let the Friday music play.</p>
-      <div class="hero__actions reveal">
-        <a href="menu.html" class="btn btn--gold">Explore the Menu</a>
-        <a href="contact.html#reserve" class="btn btn--ghost">Book a Table <i class="fa-solid fa-arrow-right"></i></a>
-      </div>
-      <div class="hero__stats reveal">
-        <div class="stat"><strong data-count="15">0</strong><span>Years of Taste</span></div>
-        <div class="stat"><strong data-count="120">0</strong><span>Signature Dishes</span></div>
-        <div class="stat"><strong data-count="50000" data-suffix="+">0</strong><span>Happy Guests</span></div>
-        <div class="stat"><strong data-count="4.2" data-decimal="1">0</strong><span>★ Google Rating</span></div>
-      </div>
-    </div>
-    <a href="#features" class="hero__scroll" aria-label="Scroll down"><span></span></a>
-  </section>
-
-  <!-- ===== Feature Strip ===== -->
-  <section class="features" id="features">
-    <div class="container features__grid">
-      <div class="feature reveal">
-        <i class="fa-solid fa-fire-burner"></i>
-        <h3>Live Tandoor</h3>
-        <p>Smoky kebabs &amp; breads straight from the clay oven.</p>
-      </div>
-      <div class="feature reveal">
-        <i class="fa-solid fa-bowl-food"></i>
-        <h3>Multi-Cuisine</h3>
-        <p>Indian, Chinese, Sichuan &amp; Continental under one roof.</p>
-      </div>
-      <div class="feature reveal">
-        <i class="fa-solid fa-guitar"></i>
-        <h3>Friday Live Music</h3>
-        <p>Soulful evenings with live performances every week.</p>
-      </div>
-      <div class="feature reveal">
-        <i class="fa-solid fa-champagne-glasses"></i>
-        <h3>Grand Banquet</h3>
-        <p>Weddings, receptions &amp; corporate events, done right.</p>
-      </div>
+  <!-- ===== Page banner ===== -->
+  <section class="pagehero">
+    <div class="pagehero__bg" data-img="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?auto=format&fit=crop&w=1920&q=80"></div>
+    <div class="pagehero__overlay"></div>
+    <div class="container pagehero__content">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="index.html">Home</a> <span>/</span> <span aria-current="page">About</span>
+      </nav>
+      <p class="eyebrow eyebrow--light">Our Story</p>
+      <h1 class="pagehero__title">A Taste of <span>Tradition</span></h1>
+      <p class="pagehero__sub">Serving Rishra a royal feast of flavours since 2009 — where every meal feels like a celebration.</p>
     </div>
   </section>
 
-  <!-- ===== About teaser ===== -->
-  <section class="about section" id="about">
+  <!-- ===== Story ===== -->
+  <section class="about section">
     <div class="container about__inner">
       <div class="about__media reveal">
         <div class="about__img about__img--main" data-img="https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=900&q=80"></div>
@@ -126,91 +81,57 @@
         </div>
       </div>
       <div class="about__text reveal">
-        <p class="eyebrow">Our Story</p>
+        <p class="eyebrow">Where It Began</p>
         <h2 class="section__title">Where Every Meal Feels <span>Royal</span></h2>
         <p>At <strong>Rajasik Restaurant &amp; Banquet</strong>, dining is a celebration. Nestled in the heart of Rishra, we bring together the bold spices of North India, the fragrant smoke of the tandoor, and the wok-fired magic of the Far East — all crafted from the finest ingredients and time-honoured recipes.</p>
+        <p>What started as a small family kitchen has grown into one of Rishra's most-loved dining destinations — a place where friends gather on Friday nights for live music, families share Sunday feasts, and the biggest celebrations of life unfold in our banquet hall.</p>
+        <p>Whether it's a quiet family dinner or a grand wedding for hundreds, our table is always set for you.</p>
         <ul class="about__list">
           <li><i class="fa-solid fa-check"></i> Freshly prepared, authentic recipes</li>
           <li><i class="fa-solid fa-check"></i> Warm, family-friendly ambience</li>
           <li><i class="fa-solid fa-check"></i> Dine-in, takeaway &amp; home delivery</li>
           <li><i class="fa-solid fa-check"></i> Air-conditioned banquet for 200+ guests</li>
         </ul>
-        <div class="hero__actions">
-          <a href="about.html" class="btn btn--dark">Read Our Story</a>
-          <a href="contact.html#reserve" class="btn btn--gold">Reserve a Table</a>
+        <a href="contact.html#reserve" class="btn btn--gold">Reserve Your Experience</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Why dine with us ===== -->
+  <section class="section section--cream">
+    <div class="container">
+      <div class="section__head reveal">
+        <p class="eyebrow">Why Rajasik</p>
+        <h2 class="section__title">More Than a <span>Meal</span></h2>
+        <p class="section__sub">A few of the reasons our guests keep coming back.</p>
+      </div>
+      <div class="valuegrid">
+        <div class="valuecard reveal">
+          <i class="fa-solid fa-leaf"></i>
+          <h3>Fresh &amp; Authentic</h3>
+          <p>Daily-fresh ingredients and recipes true to their roots, from tandoor to wok.</p>
+        </div>
+        <div class="valuecard reveal">
+          <i class="fa-solid fa-music"></i>
+          <h3>Live Friday Music</h3>
+          <p>Soulful live performances every Friday night to make your evening special.</p>
+        </div>
+        <div class="valuecard reveal">
+          <i class="fa-solid fa-champagne-glasses"></i>
+          <h3>Grand Banquet</h3>
+          <p>An elegant, air-conditioned hall for weddings, receptions and corporate events.</p>
+        </div>
+        <div class="valuecard reveal">
+          <i class="fa-solid fa-heart"></i>
+          <h3>Warm Hospitality</h3>
+          <p>Family-friendly service that treats every guest like royalty, every visit.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== Chef's Specials ===== -->
-  <section class="specials section section--cream">
-    <div class="container">
-      <div class="section__head reveal">
-        <p class="eyebrow">Most Loved</p>
-        <h2 class="section__title">Chef's <span>Specials</span></h2>
-        <p class="section__sub">A taste of what's waiting for you. See the full menu for more.</p>
-      </div>
-      <div class="specials__grid">
-        <article class="dish reveal">
-          <div class="dish__img" data-img="https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80"></div>
-          <div class="dish__body">
-            <div class="dish__top"><h3>Butter Chicken</h3><span class="dish__price">₹280</span></div>
-            <p>Tandoori chicken simmered in a velvety tomato-butter gravy.</p>
-            <span class="dish__tag tag--spicy">Bestseller</span>
-          </div>
-        </article>
-        <article class="dish reveal">
-          <div class="dish__img" data-img="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=600&q=80"></div>
-          <div class="dish__body">
-            <div class="dish__top"><h3>Chicken Reshmi Kebab</h3><span class="dish__price">₹260</span></div>
-            <p>Silky, char-grilled kebabs marinated in cream &amp; spices.</p>
-            <span class="dish__tag tag--tandoor">Tandoor</span>
-          </div>
-        </article>
-        <article class="dish reveal">
-          <div class="dish__img" data-img="https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80"></div>
-          <div class="dish__body">
-            <div class="dish__top"><h3>Schezwan Chicken</h3><span class="dish__price">₹200</span></div>
-            <p>Wok-tossed chicken in a fiery Sichuan chilli sauce.</p>
-            <span class="dish__tag tag--spicy">Spicy</span>
-          </div>
-        </article>
-        <article class="dish reveal">
-          <div class="dish__img" data-img="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=600&q=80"></div>
-          <div class="dish__body">
-            <div class="dish__top"><h3>Paneer Tikka</h3><span class="dish__price">₹220</span></div>
-            <p>Cottage cheese cubes smoked over coal with peppers.</p>
-            <span class="dish__tag tag--veg">Veg</span>
-          </div>
-        </article>
-      </div>
-      <div class="section__cta reveal">
-        <a href="menu.html" class="btn btn--dark">View Full Menu <i class="fa-solid fa-arrow-right"></i></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Banquet band ===== -->
-  <section class="banquet section" id="banquet">
-    <div class="banquet__bg" data-img="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1920&q=80"></div>
-    <div class="banquet__overlay"></div>
-    <div class="container banquet__content reveal">
-      <p class="eyebrow eyebrow--light">Celebrate With Us</p>
-      <h2 class="section__title section__title--light">A Banquet Fit for <span>Royalty</span></h2>
-      <p>From dream weddings and receptions to corporate galas and birthdays, our elegant, air-conditioned banquet hall sets the perfect stage. Custom menus, dedicated service, and a setting your guests will remember.</p>
-      <div class="banquet__pills">
-        <span><i class="fa-solid fa-ring"></i> Weddings</span>
-        <span><i class="fa-solid fa-glass-cheers"></i> Receptions</span>
-        <span><i class="fa-solid fa-briefcase"></i> Corporate Events</span>
-        <span><i class="fa-solid fa-cake-candles"></i> Birthdays</span>
-      </div>
-      <a href="banquet.html" class="btn btn--gold">Explore the Banquet</a>
-    </div>
-  </section>
-
   <!-- ===== Testimonials ===== -->
-  <section class="reviews section section--cream">
+  <section class="reviews section">
     <div class="container">
       <div class="section__head reveal">
         <p class="eyebrow">Loved by Guests</p>
@@ -240,12 +161,12 @@
   <!-- ===== Reserve CTA band ===== -->
   <section class="ctaband section">
     <div class="container ctaband__inner reveal">
-      <p class="eyebrow eyebrow--light">Book Your Table</p>
-      <h2 class="section__title">Ready When You <span>Are</span></h2>
-      <p>Reserve a table for dinner, plan a celebration, or just call us for a takeaway. We'd love to have you.</p>
+      <p class="eyebrow eyebrow--light">Come Dine With Us</p>
+      <h2 class="section__title">Your Table Awaits at <span>Rajasik</span></h2>
+      <p>Reserve a table, plan a celebration, or simply drop by for a meal you'll remember.</p>
       <div class="ctaband__actions">
         <a href="contact.html#reserve" class="btn btn--gold">Reserve a Table</a>
-        <a href="tel:+919830180548" class="btn btn--ghost"><i class="fa-solid fa-phone"></i> Call +91 98301 80548</a>
+        <a href="menu.html" class="btn btn--ghost">View the Menu <i class="fa-solid fa-arrow-right"></i></a>
       </div>
     </div>
   </section>
@@ -302,7 +223,6 @@
     </div>
   </footer>
 
-  <!-- Floating actions -->
   <a href="https://wa.me/919830180548" class="fab fab--wa" aria-label="Chat on WhatsApp" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
   <button class="fab fab--top" id="backTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
 

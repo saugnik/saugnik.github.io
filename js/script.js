@@ -1,5 +1,7 @@
 /* ===================================================================
-   Rajasik Restaurant & Banquet — interactions
+   Rajasik Restaurant & Banquet — shared interactions (multipage)
+   Loaded on every page; each block self-guards so it only runs where
+   the relevant markup exists.
    =================================================================== */
 (function () {
   "use strict";
@@ -67,34 +69,77 @@
     ],
   };
 
-  const grid = $("#menuGrid");
-  function renderMenu(cat) {
-    if (!grid) return;
-    grid.innerHTML = MENU[cat]
-      .map(([name, type, price, desc, badge], i) => {
-        const dot = `<span class="mitem__dot mitem__dot--${type === "veg" ? "veg" : "non"}"><i class="fa-solid fa-circle"></i></span>`;
-        const tag = badge ? `<span class="mitem__badge">${badge}</span>` : "";
-        const sub = desc ? `<div class="mitem__desc">${desc}</div>` : "";
-        return `
-        <div class="mitem" style="animation-delay:${i * 50}ms">
-          <div class="mitem__main">
-            <div class="mitem__name">${dot}${name} ${tag}</div>${sub}
-          </div>
-          <span class="mitem__lead"></span>
-          <span class="mitem__price">₹${price}</span>
-        </div>`;
-      })
-      .join("");
-  }
-  renderMenu("tandoor");
+  const CAT_LABEL = {
+    tandoor: "Tandoor & Starters",
+    northindian: "North Indian",
+    chinese: "Chinese & Sichuan",
+    continental: "Continental",
+    breads: "Breads & Rice",
+    desserts: "Desserts",
+  };
+  const CAT_ICON = {
+    tandoor: "fa-fire-burner",
+    northindian: "fa-bowl-food",
+    chinese: "fa-pepper-hot",
+    continental: "fa-utensils",
+    breads: "fa-bread-slice",
+    desserts: "fa-stroopwafel",
+  };
 
-  $$(".menu__tab").forEach((tab) => {
-    tab.addEventListener("click", () => {
-      $$(".menu__tab").forEach((t) => t.classList.remove("active"));
-      tab.classList.add("active");
-      renderMenu(tab.dataset.cat);
+  function itemHTML([name, type, price, desc, badge], i) {
+    const dot = `<span class="mitem__dot mitem__dot--${type === "veg" ? "veg" : "non"}"><i class="fa-solid fa-circle"></i></span>`;
+    const tag = badge ? `<span class="mitem__badge">${badge}</span>` : "";
+    const sub = desc ? `<div class="mitem__desc">${desc}</div>` : "";
+    return `
+      <div class="mitem" style="animation-delay:${(i % 6) * 50}ms">
+        <div class="mitem__main">
+          <div class="mitem__name">${dot}${name} ${tag}</div>${sub}
+        </div>
+        <span class="mitem__lead"></span>
+        <span class="mitem__price">₹${price}</span>
+      </div>`;
+  }
+
+  /* ---------- Tabbed menu (home / any page with #menuGrid) ---------- */
+  const grid = $("#menuGrid");
+  if (grid) {
+    const renderMenu = (cat) => { grid.innerHTML = MENU[cat].map(itemHTML).join(""); };
+    renderMenu("tandoor");
+    $$(".menu__tab").forEach((tab) => {
+      tab.addEventListener("click", () => {
+        $$(".menu__tab").forEach((t) => { t.classList.remove("active"); t.setAttribute("aria-selected", "false"); });
+        tab.classList.add("active");
+        tab.setAttribute("aria-selected", "true");
+        renderMenu(tab.dataset.cat);
+      });
     });
-  });
+  }
+
+  /* ---------- Full menu (menu page with #menuFull) ---------- */
+  const full = $("#menuFull");
+  if (full) {
+    full.innerHTML = Object.keys(MENU).map((cat) => `
+      <section class="menu-cat" id="cat-${cat}">
+        <h3 class="menu-cat__title"><i class="fa-solid ${CAT_ICON[cat]}"></i> ${CAT_LABEL[cat]}</h3>
+        <div class="menu__grid">${MENU[cat].map(itemHTML).join("")}</div>
+      </section>`).join("");
+
+    // Category chips highlight the section currently in view
+    const chips = $$("#menuNav a");
+    if (chips.length) {
+      const chipMap = {};
+      chips.forEach((a) => (chipMap[a.getAttribute("href").slice(1)] = a));
+      const catObs = new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) {
+            chips.forEach((a) => a.classList.remove("active"));
+            chipMap[en.target.id]?.classList.add("active");
+          }
+        });
+      }, { rootMargin: "-30% 0px -60% 0px" });
+      $$(".menu-cat").forEach((s) => catObs.observe(s));
+    }
+  }
 
   /* ---------- Gallery ---------- */
   const GALLERY = [
@@ -110,116 +155,135 @@
   const gGrid = $("#galleryGrid");
   if (gGrid) {
     gGrid.innerHTML = GALLERY.map(([url, mod]) =>
-      `<div class="gitem ${mod ? "gitem--" + mod : ""}" data-full="${url}">
-         <div class="gitem__img" data-img="${url}"></div>
-       </div>`
+      `<button class="gitem ${mod ? "gitem--" + mod : ""}" data-full="${url}" aria-label="View photo">
+         <span class="gitem__img" data-img="${url}"></span>
+       </button>`
     ).join("");
-    // load gallery bg images
     $$("#galleryGrid [data-img]").forEach((el) => {
-      const url = el.getAttribute("data-img");
-      el.style.backgroundImage = `url("${url}")`;
+      el.style.backgroundImage = `url("${el.getAttribute("data-img")}")`;
     });
   }
 
   /* ---------- Lightbox ---------- */
   const lb = $("#lightbox"), lbImg = $("#lightboxImg");
-  $$(".gitem").forEach((g) =>
-    g.addEventListener("click", () => {
-      lbImg.src = g.dataset.full;
-      lb.classList.add("open");
-      lb.setAttribute("aria-hidden", "false");
-    })
-  );
-  function closeLb() { lb.classList.remove("open"); lb.setAttribute("aria-hidden", "true"); }
-  if (lb) {
-    lb.addEventListener("click", (e) => { if (e.target === lb || e.target.classList.contains("lightbox__close")) closeLb(); });
+  if (lb && lbImg) {
+    const closeLb = () => { lb.classList.remove("open"); lb.setAttribute("aria-hidden", "true"); };
+    $$(".gitem").forEach((g) =>
+      g.addEventListener("click", () => {
+        lbImg.src = g.dataset.full;
+        lb.classList.add("open");
+        lb.setAttribute("aria-hidden", "false");
+      })
+    );
+    lb.addEventListener("click", (e) => {
+      if (e.target === lb || e.target.classList.contains("lightbox__close")) closeLb();
+    });
     document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLb(); });
   }
 
-  /* ---------- Mobile nav ---------- */
-  const toggle = $("#navToggle"), links = $("#navLinks");
-  function closeNav() { toggle.classList.remove("open"); links.classList.remove("open"); toggle.setAttribute("aria-expanded", "false"); }
-  toggle.addEventListener("click", () => {
-    const open = links.classList.toggle("open");
-    toggle.classList.toggle("open", open);
-    toggle.setAttribute("aria-expanded", String(open));
-  });
-  $$("#navLinks a").forEach((a) => a.addEventListener("click", closeNav));
+  /* ---------- Mobile nav (drawer + backdrop + scroll lock) ---------- */
+  const toggle = $("#navToggle"), links = $("#navLinks"), backdrop = $("#navBackdrop");
+  if (toggle && links) {
+    const setNav = (open) => {
+      links.classList.toggle("open", open);
+      toggle.classList.toggle("open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+      document.body.classList.toggle("nav-open", open);
+      if (backdrop) backdrop.classList.toggle("show", open);
+    };
+    toggle.addEventListener("click", () => setNav(!links.classList.contains("open")));
+    if (backdrop) backdrop.addEventListener("click", () => setNav(false));
+    $$("#navLinks a").forEach((a) => a.addEventListener("click", () => setNav(false)));
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") setNav(false); });
+  }
 
   /* ---------- Sticky nav + back-to-top ---------- */
   const nav = $("#nav"), backTop = $("#backTop");
-  function onScroll() {
+  const onScroll = () => {
     const y = window.scrollY;
-    nav.classList.toggle("scrolled", y > 30);
-    backTop.classList.toggle("show", y > 600);
-  }
+    if (nav) nav.classList.toggle("scrolled", y > 30);
+    if (backTop) backTop.classList.toggle("show", y > 600);
+  };
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
-  backTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+  if (backTop) backTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
-  /* ---------- Scrollspy (active nav link) ---------- */
-  const sections = $$("section[id]");
-  const navMap = {};
-  $$('#navLinks a[href^="#"]').forEach((a) => (navMap[a.getAttribute("href").slice(1)] = a));
-  const spy = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((en) => {
-        if (en.isIntersecting) {
-          $$("#navLinks a").forEach((a) => a.classList.remove("active"));
-          navMap[en.target.id]?.classList.add("active");
-        }
-      });
-    },
-    { rootMargin: "-45% 0px -50% 0px" }
-  );
-  sections.forEach((s) => spy.observe(s));
+  /* ---------- Reveal on scroll + animated counters ----------
+     Both use IntersectionObserver. As a safety net, if the observer can't
+     run (no support, or the tab is opened in the background where the
+     observer won't report intersections) we jump straight to the final
+     state so content is never left invisible / stuck at zero. */
+  const reveals  = $$(".reveal");
+  const counters = $$("[data-count]");
 
-  /* ---------- Reveal on scroll ---------- */
-  const revObs = new IntersectionObserver(
-    (entries, obs) => {
+  // Reveal with no animation — used when the observer can't run (e.g. a
+  // background tab), where there's nothing to animate anyway.
+  const showReveals = () => reveals.forEach((el) => { el.style.transition = "none"; el.classList.add("in"); });
+  const setCounterFinal = (el) => {
+    const target = parseFloat(el.dataset.count);
+    const decimals = parseInt(el.dataset.decimal || "0", 10);
+    const suffix = el.dataset.suffix || "";
+    el.textContent = (decimals ? target.toFixed(decimals) : target.toLocaleString("en-IN")) + suffix;
+  };
+  const animateCounter = (el) => {
+    const target = parseFloat(el.dataset.count);
+    const decimals = parseInt(el.dataset.decimal || "0", 10);
+    const suffix = el.dataset.suffix || "";
+    const dur = 1600; let start = null;
+    const step = (ts) => {
+      if (!start) start = ts;
+      const p = Math.min((ts - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = target * eased;
+      el.textContent = (decimals ? val.toFixed(decimals) : Math.floor(val).toLocaleString("en-IN")) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+      else setCounterFinal(el);
+    };
+    requestAnimationFrame(step);
+  };
+
+  if (!("IntersectionObserver" in window) || document.hidden) {
+    showReveals();
+    counters.forEach(setCounterFinal);
+  } else {
+    const revObs = new IntersectionObserver((entries, obs) => {
       entries.forEach((en) => {
         if (en.isIntersecting) { en.target.classList.add("in"); obs.unobserve(en.target); }
       });
-    },
-    { threshold: 0.12 }
-  );
-  $$(".reveal").forEach((el) => revObs.observe(el));
+    }, { threshold: 0.12 });
+    reveals.forEach((el) => revObs.observe(el));
 
-  /* ---------- Animated counters ---------- */
-  const counters = $$("[data-count]");
-  const cObs = new IntersectionObserver(
-    (entries, obs) => {
+    const cObs = new IntersectionObserver((entries, obs) => {
       entries.forEach((en) => {
         if (!en.isIntersecting) return;
-        const el = en.target;
-        const target = parseFloat(el.dataset.count);
-        const decimals = parseInt(el.dataset.decimal || "0", 10);
-        const suffix = el.dataset.suffix || "";
-        const dur = 1600; let start = null;
-        function step(ts) {
-          if (!start) start = ts;
-          const p = Math.min((ts - start) / dur, 1);
-          const eased = 1 - Math.pow(1 - p, 3);
-          const val = target * eased;
-          el.textContent = (decimals ? val.toFixed(decimals) : Math.floor(val).toLocaleString("en-IN")) + suffix;
-          if (p < 1) requestAnimationFrame(step);
-          else el.textContent = (decimals ? target.toFixed(decimals) : target.toLocaleString("en-IN")) + suffix;
-        }
-        requestAnimationFrame(step);
-        obs.unobserve(el);
+        animateCounter(en.target);
+        obs.unobserve(en.target);
       });
-    },
-    { threshold: 0.5 }
-  );
-  counters.forEach((c) => cObs.observe(c));
+    }, { threshold: 0.5 });
+    counters.forEach((c) => cObs.observe(c));
+
+    // Failsafe: if observers stalled shortly after load, force the final state.
+    window.addEventListener("load", () => setTimeout(() => {
+      if (reveals.length && !document.querySelector(".reveal.in")) showReveals();
+      counters.forEach((el) => { if (el.textContent.trim() === "0") setCounterFinal(el); });
+    }, 1400));
+  }
 
   /* ---------- Reservation → WhatsApp ---------- */
   const form = $("#reserveForm");
   if (form) {
-    // prevent selecting past dates
     const dateEl = $("#rDate");
-    const today = new Date().toISOString().split("T")[0];
-    if (dateEl) dateEl.min = today;
+    if (dateEl) dateEl.min = new Date().toISOString().split("T")[0];
+
+    // Pre-select enquiry type from URL (?type=banquet) e.g. from the Banquet page
+    const typeParam = new URLSearchParams(location.search).get("type");
+    const typeEl = $("#rType");
+    if (typeParam && typeEl) {
+      const want = typeParam.toLowerCase();
+      [...typeEl.options].forEach((o) => {
+        if (o.value.toLowerCase().includes(want)) typeEl.value = o.value;
+      });
+    }
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -234,10 +298,10 @@
       if (phone && phone.length < 10) { $("#rPhone").classList.add("invalid"); ok = false; }
       if (!ok) { form.querySelector(".invalid")?.focus(); return; }
 
-      const d = $("#rName").value.trim();
+      const name = $("#rName").value.trim();
       const msg =
         `*New Reservation — Rajasik Restaurant*%0A%0A` +
-        `👤 Name: ${encodeURIComponent(d)}%0A` +
+        `👤 Name: ${encodeURIComponent(name)}%0A` +
         `📞 Phone: ${encodeURIComponent($("#rPhone").value.trim())}%0A` +
         `📅 Date: ${$("#rDate").value}%0A` +
         `⏰ Time: ${$("#rTime").value}%0A` +
@@ -248,7 +312,6 @@
       window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, "_blank");
     });
 
-    // clear invalid state on input
     $$("#reserveForm input, #reserveForm select").forEach((f) =>
       f.addEventListener("input", () => f.classList.remove("invalid"))
     );
